@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Carrito - Kami Store</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .carrito-page {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #1a1a1a;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      min-height: 60vh;
+    }
+    
+    .carrito-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #333;
+      padding-bottom: 1rem;
+    }
+    
+    .btn-volver {
+      background: #666;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    
+    .btn-volver:hover {
+      background: #777;
+    }
+    
+    .carrito-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: #2a2a2a;
+      border-radius: 10px;
+      border-left: 4px solid #ca0f82;
+    }
+    
+    .item-info {
+      flex: 1;
+    }
+    
+    .item-nombre {
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    
+    .item-precio {
+      color: #ff6b6b;
+      font-size: 1.1rem;
+    }
+    
+    .item-cantidad {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 2rem;
+    }
+    
+    .btn-cantidad {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .btn-eliminar {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .carrito-total {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #333;
+      border-radius: 10px;
+    }
+    
+    .total-precio {
+      font-size: 2rem;
+      color: #ff6b6b;
+      font-weight: bold;
+    }
+    
+    .btn-whatsapp {
+      background: #25d366;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+    
+    .btn-whatsapp:hover {
+      background: #128c7e;
+    }
+    
+    .carrito-vacio {
+      text-align: center;
+      padding: 3rem;
+      color: #666;
+    }
+
+    /* Asegurar que el body tenga altura mínima */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+    /* ... existing styles ... */
+    
+    /* ===== ESTILOS PARA EL FOOTER ===== */
+    footer {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 50%, #1a1a1a 100%);
+      color: white;
+      margin-top: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff4f87, transparent);
+      animation: footerShine 3s infinite;
+    }
+
+    @keyframes footerShine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem 1rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Sección de marca */
+    .footer-brand {
+      opacity: 1; /* Forzar visibilidad */
+      transform: translateY(0); /* Sin desplazamiento */
+    }
+
+    .footer-logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff4f87, #a81fc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: logoGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes logoGlow {
+      from { filter: drop-shadow(0 0 5px rgba(255, 79, 135, 0.3)); }
+      to { filter: drop-shadow(0 0 15px rgba(255, 79, 135, 0.6)); }
+    }
+
+    .footer-description {
+      color: #ccc;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    /* Sección de redes sociales */
+    .footer-social {
+      opacity: 1; /* Forzar visibilidad */
+      transform: translateY(0); /* Sin desplazamiento */
+    }
+
+    .footer-social h3 {
+      color: #ff4f87;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      position: relative;
+    }
+
+    .footer-social h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: linear-gradient(90deg, #ff4f87, #a81fc4);
+      border-radius: 2px;
+    }
+
+    .social-links {
+      margin-bottom: 1rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      color: #ccc;
+      text-decoration: none;
+      padding: 0.8rem 0;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      padding-left: 0.5rem;
+    }
+
+    .social-link:hover {
+      color: #ff4f87;
+      background: rgba(255, 79, 135, 0.1);
+      transform: translateX(10px);
+    }
+
+    .social-icon {
+      margin-right: 12px;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover .social-icon {
+      transform: scale(1.2);
+    }
+
+    /* Sección de contacto */
+    .footer-contact {
+      opacity: 1; /* Forzar visibilidad */
+      transform: translateY(0); /* Sin desplazamiento */
+    }
+
+    .footer-contact h3 {
+      color: #ff4f87;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      position: relative;
+    }
+
+    .footer-contact h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: linear-gradient(90deg, #ff4f87, #a81fc4);
+      border-radius: 2px;
+    }
+
+    .contact-info {
+      color: #ccc;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+      border-radius: 5px;
+      padding-left: 0.5rem;
+    }
+
+    .contact-item:hover {
+      color: #ff4f87;
+      background: rgba(255, 79, 135, 0.1);
+      transform: translateX(5px);
+    }
+
+    .contact-icon {
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    /* Sección inferior */
+    .footer-bottom {
+      text-align: center;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255, 79, 135, 0.2);
+    }
+
+    .footer-bottom p {
+      color: #999;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive para móviles */
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+      
+      .footer-brand, .footer-social, .footer-contact {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+</style>
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kami Store</h1>
+  </header>
+
+  <main>
+    <div class="carrito-page">
+      <div class="carrito-header">
+        <h2>Mi Carrito de Compras</h2>
+        <a href="index.html" class="btn-volver">← Volver a la tienda</a>
+      </div>
+      
+      <div id="carrito-contenido">
+        <!-- Los items del carrito se cargarán aquí -->
+      </div>
+
+      
+      
+      <div id="carrito-total" class="carrito-total" style="display: none;">
+        <div class="total-precio">Total: $<span id="total-precio">0</span></div>
+        <a href="#" id="btn-whatsapp" class="btn-whatsapp">Finalizar compra por WhatsApp</a>
+      </div>
+      
+      <div id="carrito-vacio" class="carrito-vacio">
+        <h3>Tu carrito está vacío</h3>
+        <p>Agrega algunos productos para comenzar tu compra</p>
+        <a href="index.html" class="btn-volver">Ir a la tienda</a>
+      </div>
+    </div>
+  </main>
+
+  
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-content">
+        <!-- Sección de la marca -->
+        <div class="footer-brand">
+          <div class="footer-logo">Kami Store</div>
+          <p class="footer-description">
+            Tu tienda favorita de productos anime y gaming. Calidad premium,
+            diseños únicos y la mejor atención al cliente.
+          </p>
+        </div>
+
+        <!-- Sección de redes sociales -->
+        <div class="footer-social">
+          <h3>Síguenos</h3>
+          <div class="social-links">
+            <a href="https://instagram.com/kami_store_co" target="_blank" class="social-link instagram-link">
+              <span class="social-icon">📷</span>
+              <span>@Kami_Store_co</span>
+            </a>
+            <a href="https://wa.me/573018458871" target="_blank" class="social-link whatsapp-link">
+              <span class="social-icon">💬</span>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Sección de contacto -->
+        <div class="footer-contact">
+          <h3>Contacto</h3>
+          <div class="contact-info">
+            <div class="contact-item">
+              <span class="contact-icon">📧</span>
+              <span>kamistore@gmail.com</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📱</span>
+              <span>+57 301 845 8871</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <span>Colombia</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">🕒</span>
+              <span>Lun - Sáb: 9:00 AM - 8:00 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Kami Store. Todos los derechos reservados.</p>
+        <p class="footer-love">Hecho con ❤️ para los amantes del anime</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="carrito-script.js"></script>
+</body>
+</html>
