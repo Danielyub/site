@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kami Store</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Kami Store</h1>
+    
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar productos..." autocomplete="off">
+        <button id="search-btn">🔍</button>
+        <button id="clear-search" style="display: none;">✖️</button>
+      </div>
+      <div id="search-suggestions" class="search-suggestions"></div>
+    </div>
+    
+    <nav>
+      <ul>
+        <li><a href="#sudaderas">Sudaderas</a></li>
+        <li><a href="#llaveros">Llaveros</a></li>
+        <li><a href="#figuras">Figuras</a></li>
+        <li><a href="#mausepad">Mausepad</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sección de resultados de búsqueda -->
+    <section id="search-results" class="categoria search-results" style="display: none;">
+      <h2>Resultados de búsqueda</h2>
+      <div id="results-container"></div>
+      <div id="no-results" style="display: none;">
+        <p>No se encontraron productos que coincidan con tu búsqueda 😔</p>
+        <button onclick="limpiarBusqueda()" class="btn-clear-search">Ver todos los productos</button>
+      </div>
+    </section>
+
+    <section id="sudaderas" class="categoria">
+      <h2>Sudaderas</h2>
+      <div class="producto">
+        <img src="img/sudadera1.jpg" alt="Sudadera anime" onclick="mostrarInfoProducto('Sudadera Goku', 80000, this)" style="cursor: pointer;" />
+        <h3>Sudadera Goku</h3>
+        <p>$80.000</p>
+        <div class="cantidad">
+          <button onclick="cambiarCantidad(this, -1)">-</button>
+          <span>1</span>
+          <button onclick="cambiarCantidad(this, 1)">+</button>
+        </div>
+        <button onclick="agregarAlCarrito('Sudadera Goku', 80000, this)">Agregar al carrito</button>
+      </div>
+
+      <div class="producto">
+        <img src="img/sudadera2.jpg" alt="Sudadera anime" onclick="mostrarInfoProducto('Sudadera Ahegao', 90000, this)" style="cursor: pointer;" />
+        <h3>Sudadera Ahegao</h3>
+        <p>$90.000</p>
+        <div class="cantidad">
+          <button onclick="cambiarCantidad(this, -1)">-</button>
+          <span>1</span>
+          <button onclick="cambiarCantidad(this, 1)">+</button>
+        </div>
+        <button onclick="agregarAlCarrito('Sudadera Ahegao', 90000, this)">Agregar al carrito</button>
+      </div>
+    </section>
+
+    <section id="llaveros" class="categoria">  
+      <h2>Llaveros</h2>
+      <div class="producto">
+        <img src="img/llavero1.jpg" alt="Llavero anime" onclick="mostrarInfoProducto('Llavero Kuromi', 15000, this)" style="cursor: pointer;" />
+        <h3>Llavero Kuromi</h3>
+        <p>$15.000</p>
+        <div class="cantidad">
+          <button onclick="cambiarCantidad(this, -1)">-</button>
+          <span>1</span>
+          <button onclick="cambiarCantidad(this, 1)">+</button>
+        </div>
+        <button onclick="agregarAlCarrito('Llavero Kuromi', 15000, this)">Agregar al carrito</button>
+      </div>
+    </section>
+
+    <section id="figuras" class="categoria">
+      <h2>Figuras</h2>
+      <div class="producto">
+        <img src="img/figura1.jpg" alt="Figura anime" onclick="mostrarInfoProducto('Figura Luffy', 120000, this)" style="cursor: pointer;" />
+        <h3>Figura Elfa</h3>
+        <p>$120.000</p>
+        <div class="cantidad">
+          <button onclick="cambiarCantidad(this, -1)">-</button>
+          <span>1</span>
+          <button onclick="cambiarCantidad(this, 1)">+</button>
+        </div>
+        <button onclick="agregarAlCarrito('Figura Luffy', 120000, this)">Agregar al carrito</button>
+      </div>
+      <div class="producto">
+        <img src="img/figura2.jpg" alt="Figura anime" onclick="mostrarInfoProducto('Figura Bruja', 130000, this)" style="cursor: pointer;" />
+        <h3>Figura Bruja</h3>
+        <p>$130.000</p>
+        <div class="cantidad">
+          <button onclick="cambiarCantidad(this, -1)">-</button>
+          <span>1</span>
+          <button onclick="cambiarCantidad(this, 1)">+</button>
+        </div>
+        <button onclick="agregarAlCarrito('Figura Bruja', 130000, this)">Agregar al carrito</button>
+      </div>
+      <div class="producto">
+        <img src="img/figura3.jpg" alt="Figura anime" onclick="mostrarInfoProducto('Figura Hu Tao', 110000, this)" style="cursor: pointer;" />
+        <h3>Figura Hu Tao</h3>
+        <p>$110.000</p>
+        <div class="cantidad">
+          <button onclick="cambiarCantidad(this, -1)">-</button>
+          <span>1</span>
+          <button onclick="cambiarCantidad(this, 1)">+</button>
+        </div>
+        <button onclick="agregarAlCarrito('Figura Hu Tao', 110000, this)">Agregar al carrito</button>
+      </div>
+    </section>
+
+    <section id="mausepad" class="categoria">
+      <h2>Mausepad</h2>
+      <div class="producto">
+        <img src="img/mausepad.jpg" alt="Mausepad" onclick="mostrarInfoProducto('Mausepad', 120000, this)" style="cursor: pointer;" />
+        <h3>Mausepad</h3>
+        <p>$120.000</p>
+        <div class="cantidad">
+          <button onclick="cambiarCantidad(this, -1)">-</button>
+          <span>1</span>
+          <button onclick="cambiarCantidad(this, 1)">+</button>
+        </div>
+        <button onclick="agregarAlCarrito('Mausepad', 120000, this)">Agregar al carrito</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Carrito flotante -->
+  <div id="carrito-flotante" onclick="abrirCarrito()">
+    <span id="carrito-icono">🛒</span>
+    <span id="carrito-contador">0</span>
+  </div>
+
+  <!-- Modal para información del producto -->
+  <div id="modal-producto" class="modal">
+    <div class="modal-contenido">
+      <span class="cerrar-modal" onclick="cerrarModal()">&times;</span>
+      <div class="modal-body">
+        <img id="modal-imagen" src="" alt="">
+        <div class="modal-info">
+          <h3 id="modal-nombre"></h3>
+          <p id="modal-descripcion"></p>
+          <p id="modal-precio"></p>
+          
+          <div class="modal-caracteristicas">
+            <h4>Características:</h4>
+            <ul id="modal-lista-caracteristicas"></ul>
+          </div>
+          
+          <div class="cantidad">
+            <button onclick="cambiarCantidad(this, -1)">-</button>
+            <span>1</span>
+            <button onclick="cambiarCantidad(this, 1)">+</button>
+          </div>
+          
+          <button id="modal-agregar-carrito" class="btn-agregar-modal">
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-content">
+        <!-- Sección de la marca -->
+        <div class="footer-brand">
+          <div class="footer-logo">Kami Store</div>
+          <p class="footer-description">
+            Tu tienda favorita de productos anime y gaming. 
+            Calidad premium, diseños únicos y la mejor atención al cliente.
+          </p>
+        </div>
+
+        <!-- Sección de redes sociales -->
+        <div class="footer-social">
+          <h3>Síguenos</h3>
+          <div class="social-links">
+            <a href="https://instagram.com/kami_store_co" target="_blank" class="social-link">
+              <span class="social-icon instagram-icon"></span>
+              <span>@Kami_Store_co</span>
+            </a>
+          </div>
+          <div class="social-links">
+            <a href="https://wa.me/573018458871" target="_blank" class="social-link">
+              <span class="social-icon whatsapp-icon"></span>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Sección de contacto -->
+        <div class="footer-contact">
+          <h3>Contacto</h3>
+          <div class="contact-info">
+            <p>📧 kamistore@gmail.com</p>
+            <p>📱 +57 301 845 8871</p>
+            <p>📍 Colombia</p>
+            <p>🕒 Lun - Sáb: 9:00 AM - 8:00 PM</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea divisoria animada -->
+      <div class="footer-divider"></div>
+
+      <!-- Copyright -->
+      <div class="footer-bottom">
+        <p class="copyright">© 2025 Kami Store. Todos los derechos reservados.</p>
+        <p class="made-with-love">
+          Hecho con <span class="heart">❤️</span> para los amantes del anime
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
