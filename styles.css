@@ -2017,9 +2017,60 @@ body {
   }
   
   /* Productos en una sola columna */
-  .categoria {
-    grid-template-columns: 1fr;
+    .productos-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    justify-items: center;
   }
+  
+  .producto {
+    width: 100%;
+    max-width: 110px;
+    margin: 0;
+    padding: 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .producto img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .producto h3 {
+    font-size: 0.8rem;
+    margin: 0.3rem 0;
+    line-height: 1.2;
+  }
+  
+  .producto p {
+    font-size: 0.7rem;
+    margin: 0.2rem 0;
+  }
+  
+  .cantidad {
+    margin: 0.3rem 0;
+  }
+  
+  .cantidad button {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+  
+  .cantidad span {
+    font-size: 0.7rem;
+    padding: 0 0.3rem;
+  }
+  
+  .producto button {
+    font-size: 0.6rem;
+    padding: 0.3rem 0.5rem;
+    margin-top: 0.3rem;
+  }
+  
   
   /* Header más compacto */
   header {
@@ -2030,7 +2081,45 @@ body {
     font-size: 1.5rem;
   }
 }
+/* Media query adicional para pantallas muy pequeñas */
+@media (max-width: 360px) {
+  .producto {
+    max-width: 100px;
+    padding: 0.4rem;
+  }
+  
+  .producto img {
+    height: 70px;
+  }
+  
+  .producto h3 {
+    font-size: 0.7rem;
+  }
+  
+  .producto p {
+    font-size: 0.65rem;
+  }
+  
+  .producto button {
+    font-size: 0.55rem;
+    padding: 0.25rem 0.4rem;
+  }
+}
 
+/* Media query para tablets (mantener diseño existente) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .productos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .producto {
+    width: 200px;
+    margin: 0.5rem;
+  }
+}
 /* ===== LOGO INTERACTIVO ===== */
 #logo-kami {
   cursor: pointer;
